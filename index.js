@@ -9,15 +9,6 @@ function setCart(c) {
     return cart;
 }
 
-// Instructions
-// We've started you off with a cart variable that points at an empty array. There are five functions that you'll have to code in order to create a working shopping cart:
-
-//TODO: The addToCart() function accepts one argument, the name of an item.
-// Use that passed-in string to create a new object representing the item. The object should consist of two key-value pairs : { itemName: name of the item, itemPrice: price of the item, }. As more items are added, the cart should start to look something like this: [ { itemName:"bananas", itemPrice: 17 }, { itemName:"pancake batter",itemPrice: 5 }, { itemName:"eggs", itemPrice: 49 }].
-// The price of each item should be a randomly-generated integer between 1 and 100.
-// HINT: Look into Math.random() and Math.floor().
-// Upon the successful addition of a new item to the cart, the function should return <itemName> has been added to your cart. .
-
 function addToCart(item) {
     item = {
         itemName: item,
@@ -44,9 +35,6 @@ function viewCart() {
         return 'Your shopping cart is empty.'
     }
 }
-
-
-//TODO: The total() function accepts no arguments, iterates through the cart array, and returns the current total value of the items in the cart.
 
 function total() {
     let totalPrice = 0;
