@@ -25,16 +25,30 @@ function addToCart(item) {
 // 1 item — In your cart, you have bananas at $17.
 // 2 items — In your cart, you have bananas at $17, and pancake batter at $5.
 // 3+ items — In your cart, you have bananas at $17, pancake batter at $5, and eggs at $49.
-
-function viewCart() {
-    if (cart !== undefined){
+function viewCartText(){
+    if(cart.length === 1){
         for(let i = 0; i < cart.length; i++){
-            console.log('hi')
+            return `you have ${cart[i].itemName} at $${cart[i].itemPrice}.`;
         }
-    } else{
-        return 'Your shopping cart is empty.'
+    } else if (cart.length === 2){
+        for(let i = 0; i < cart.length; i++){
+            return `you have ${cart[0].itemName} at $${cart[0].itemPrice}, and ${cart[1].itemName} at $${cart[1].itemPrice}.`;
+            }
+    } else if (cart.length >= 3) {
+        for(let i = 0; i < cart.length; i++){
+            
+        }
     }
-}
+  }
+  
+  function viewCart() {
+      if (getCart().length === 0){
+          return 'Your shopping cart is empty.';
+          }
+       else {
+          return 'In your cart, ' + viewCartText();
+      }
+  }
 
 function total() {
     let totalPrice = 0;
