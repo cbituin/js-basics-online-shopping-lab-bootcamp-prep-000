@@ -18,26 +18,22 @@ function addToCart(item) {
     return item.itemName + ' has been added to your cart.';
 }
 
-
-//TODO: The viewCart() function does not accept any arguments. It should loop over every item in your cart, returning the contents as one long, coherent statement in this format: In your cart, you have bananas at $17, pancake batter at $5, and eggs at $49.
-// If the cart is empty, the function should instead return Your shopping cart is empty.
-// Note: Pay close attention to the syntax above. The returned statement should be a single sentence that begins with In your cart, you have, terminates in a period, and can assume the following shapes according to how many items the cart contains:
-// 1 item — In your cart, you have bananas at $17.
-// 2 items — In your cart, you have bananas at $17, and pancake batter at $5.
-// 3+ items — In your cart, you have bananas at $17, pancake batter at $5, and eggs at $49.
 function viewCartText(){
     if(cart.length === 1){
         for(let i = 0; i < cart.length; i++){
-            return `you have ${cart[i].itemName} at $${cart[i].itemPrice}.`;
+            return ` ${cart[i].itemName} at $${cart[i].itemPrice}.`;
         }
     } else if (cart.length === 2){
         for(let i = 0; i < cart.length; i++){
-            return `you have ${cart[0].itemName} at $${cart[0].itemPrice}, and ${cart[1].itemName} at $${cart[1].itemPrice}.`;
+            return ` ${cart[0].itemName} at $${cart[0].itemPrice}, and ${cart[1].itemName} at $${cart[1].itemPrice}.`;
             }
     } else if (cart.length >= 3) {
-        for(let i = 0; i < cart.length; i++){
-            
+        let newArr = [];
+            for(let i = 0; i < cart.length - 1; i++){
+            newArr.push(` ${cart[i].itemName} at $${cart[i].itemPrice}`);
         }
+        newArr.push(` and ${cart[cart.length - 1].itemName} at $${cart[cart.length - 1].itemPrice}.`);
+        return newArr;
     }
   }
   
@@ -46,7 +42,7 @@ function viewCartText(){
           return 'Your shopping cart is empty.';
           }
        else {
-          return 'In your cart, ' + viewCartText();
+          return 'In your cart, you have' + viewCartText();
       }
   }
 
@@ -63,16 +59,18 @@ function total() {
 // HINT: Check each object's itemName value key to see if it matches the parameter, then remove it if it matches. You might find Array.prototype.splice() to be useful.
 // If the cart does not contain a matching item, the function should return That item is not in your cart.
 
-function removeFromCart(item) {
-    for(let i = 0; i < getCart().length; i++){
-        if(item != getCart()[i]){
-          return 'That item is not in your cart.';
-        } else{
-          getCart().splice(i, 1);
-          getCart();
-        }
+function removeFromCart(item){
+  let newArr = Object.values(cart);
+  for(let i = 0; i < newArr.length; i++){
+    if(item === newArr[i]){
+      delete getCart()[i];
+      return getCart();
     }
   }
+  return 'That item is not in your cart.'; 
+  
+}
+
 
 
 //TODO: The placeOrder() function accepts one argument, a credit card number.
@@ -86,7 +84,6 @@ function placeOrder(cardNumber) {
         return "Sorry, we don't have a credit card on file for you.";
     } else {
         cart = [];
-        let cartTotal = total();
-        return 'Your total cost is $' + cartTotal + ', which will be charged to the card ' + cardNumber + '.';
+        return `Your total cost is $${total()}, which will be charged to the card ${cardNumber}.`;
     }
 }
