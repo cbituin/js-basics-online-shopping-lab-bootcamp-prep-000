@@ -63,8 +63,8 @@ function removeFromCart(item){
   let newArr = Object.values(cart);
   for(let i = 0; i < newArr.length; i++){
     if(item === newArr[i]){
-      delete getCart()[i];
-      return getCart();
+      delete getCart()[i][itemName];
+      getCart();
     }
   }
   return 'That item is not in your cart.'; 
